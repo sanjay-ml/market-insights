@@ -6,6 +6,15 @@ import numpy as np
 
 app = FastAPI()
 
+@app.get("/")
+def root():
+    return {
+        "status": "ok",
+        "message": "Market Insights API is running",
+        "endpoints": ["/portfolio?range=1Y|3Y|5Y"]
+    }
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
