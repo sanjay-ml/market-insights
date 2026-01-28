@@ -1,6 +1,11 @@
 import PortfolioSection from "@/components/PortfolioSection";
 import InsightCards from "@/components/InsightCards";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+
+fetch(`${API_BASE}/portfolio?range=${range}`)
+
+
 export default function Home() {
   return (
     <main className="max-w-6xl mx-auto p-8 space-y-8">
