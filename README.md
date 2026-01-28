@@ -48,11 +48,15 @@ git clone https://github.com/sanjay-ml/market-insights.git
 cd market-insights
 
 cd backend
+
 pip install -r requirements.txt
+
 uvicorn main:app --reload
 
 cd frontend
+
 npm install
+
 npm run dev
 
 open http://localhost:3000 to view the webserver
