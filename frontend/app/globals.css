@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0b0b0b;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+button {
+  background: #1f1f1f;
+  color: white;
+  border: 1px solid #333;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+button.active {
+  background: #2563eb;
+}
+
+.card {
+  background: #141414;
+  padding: 16px;
+  border-radius: 10px;
+}
