@@ -44,6 +44,7 @@ Backend
 Setup
 
 git clone https://github.com/sanjay-ml/market-insights.git
+
 cd market-insights
 
 cd backend
