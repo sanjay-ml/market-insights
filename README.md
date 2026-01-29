@@ -11,7 +11,8 @@ Opening the backend URL first wakes up the server. Once it is active, the fronte
 If the frontend is opened before the backend has finished waking up, data may take a few seconds to appear on first load.
 
 
-Market Insights Dashboard
+
+## Market Insights Dashboard
 
 A full-stack web application that analyzes an equal-weighted stock portfolio using real market data, focusing on risk-adjusted performance and interactive visualization.
 
