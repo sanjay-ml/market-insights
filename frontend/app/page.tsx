@@ -33,7 +33,7 @@ export default function Page() {
   } | null>(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/portfolio?range=${range}`)
+    fetch(`https://market-insights-xyq9.onrender.com/portfolio?range=${range}`)
       .then(res => res.json())
       .then((data: ApiResponse) => {
         const points: ChartPoint[] = data.dates.map((d, i) => ({
