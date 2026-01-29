@@ -23,30 +23,30 @@ type ChartPoint = {
   value: number;
 };
 
+const API_BASE = "https://market-insights-xyq9.onrender.com";
+
 export default function Page() {
-  const [range, setRange] = useState("5Y");
+  const [range, setRange] = useState<"1Y" | "3Y" | "5Y">("5Y");
   const [chartData, setChartData] = useState<ChartPoint[]>([]);
-  const [metrics, setMetrics] = useState<{
-    total_return: number;
-    volatility: number;
-    sharpe: number;
-  } | null>(null);
+  const [metrics, setMetrics] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://market-insights-xyq9.onrender.com/portfolio?range=${range}`)
-      .then(res => res.json())
+    setLoading(true);
+
+    fetch(`${API_BASE}/portfolio?range=${range}`)
+      .then((res) => res.json())
       .then((data: ApiResponse) => {
-        const points: ChartPoint[] = data.dates.map((d, i) => ({
+        const points = data.dates.map((d, i) => ({
           date: d,
           value: data.values[i],
         }));
 
         setChartData(points);
-        setMetrics({
-          total_return: data.total_return,
-          volatility: data.volatility,
-          sharpe: data.sharpe,
-        });
+        setMetrics(data);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [range]);
 
@@ -55,26 +55,26 @@ export default function Page() {
       style={{
         background: "#000",
         minHeight: "100vh",
-        padding: "40px",
+        padding: 40,
         color: "white",
         fontFamily: "system-ui",
       }}
     >
       <h1>Market Insights Dashboard</h1>
-      <p style={{ color: "#aaa" }}>
+      <p style={{ color: "#aaa", marginBottom: 30 }}>
         Equal-weighted portfolio performance
       </p>
 
       {metrics && (
-        <div style={{ display: "flex", gap: 20, margin: "30px 0" }}>
+        <div style={{ display: "flex", gap: 20, marginBottom: 30 }}>
           <Metric title="Total Return" value={`${metrics.total_return}%`} />
           <Metric title="Volatility" value={`${metrics.volatility}%`} />
-          <Metric title="Sharpe Ratio" value={metrics.sharpe.toString()} />
+          <Metric title="Sharpe Ratio" value={metrics.sharpe.toFixed(2)} />
         </div>
       )}
 
-      <div style={{ marginBottom: 16 }}>
-        {["1Y", "3Y", "5Y"].map(r => (
+      <div style={{ marginBottom: 20 }}>
+        {(["1Y", "3Y", "5Y"] as const).map((r) => (
           <button
             key={r}
             onClick={() => setRange(r)}
@@ -91,6 +91,12 @@ export default function Page() {
           </button>
         ))}
       </div>
+
+      {loading && (
+        <div style={{ color: "#aaa", marginBottom: 12 }}>
+          Waking up backend… this may take a few seconds
+        </div>
+      )}
 
       <div
         style={{

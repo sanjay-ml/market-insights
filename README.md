@@ -1,3 +1,16 @@
+## ⚠️ IMPORTANT — READ FIRST
+
+**Before opening the frontend, please open the backend link once and wait for it to load.**
+
+- **Backend (API):** https://market-insights-xyq9.onrender.com  
+- **Frontend (Dashboard):** https://market-insights-psi.vercel.app
+
+The backend is deployed on a free-tier service and may go into a sleep state after inactivity.  
+Opening the backend URL first wakes up the server. Once it is active, the frontend will load data normally and all interactions will work as expected.
+
+If the frontend is opened before the backend has finished waking up, data may take a few seconds to appear on first load.
+
+
 Market Insights Dashboard
 
 A full-stack web application that analyzes an equal-weighted stock portfolio using real market data, focusing on risk-adjusted performance and interactive visualization.
